@@ -42,7 +42,8 @@ function App() {
   
 }
 
-let cards = ["Cat", "Dog" , "Cat", "Dog", "Tree", "Tree"]
+let cards_text = ["Cat", "Dog" , "Cat", "Dog", "Tree", "Tree"]
+let cards = ["5", "5", "4", "4", "3", "3"]
 cards = cards.sort(() => Math.random() - 0.5);
 
 function BoardGame(){
@@ -112,6 +113,7 @@ function BoardGame(){
     setFlippedCards([]); 
     setHasWon(false);
     setIsBusy(false);
+    cards = cards.sort(() => Math.random() - 0.5);
   }
 
   function closeWinningOverlay(){
@@ -179,7 +181,8 @@ function MemoryCard( {value, isFlipped, onCardClick}){
         <div className="memory-card-front">
           
         </div>
-        <div className="memory-card-back">{value}</div>
+        <div className="memory-card-back">
+          <img src={`src/assets/${value}.png`} alt="" /></div>
       </div>
     </div>
   );
