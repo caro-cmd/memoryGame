@@ -31,7 +31,7 @@ function App() {
         <>
           <div id="pop-up">
             <p>Für O & E</p>
-            <p>Illustrationen von: Meiner lieben Schwester</p>
+            {/* <p>Illustrationen von: Meiner lieben Schwester</p> */}
           </div>
         </>
       ) }
