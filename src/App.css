@@ -4,7 +4,7 @@
   position: fixed;
   bottom: 1vh;
   left: 2vw;
-  padding: 1%;
+  padding: 0.5rem;
   border-radius: 100%;
   font-size: x-large;
   z-index: 1001;
@@ -230,6 +230,17 @@ button{
 
 /* Mobile */
 @media (max-width: 760px) {
+
+  html, body, #root {
+  height: auto;
+  overflow-y: auto;
+}
+
+
+  #heart-btn{
+    font-size: large;
+  }
+
   .header {
     flex-direction: column;
     gap: 10px;
@@ -240,7 +251,7 @@ button{
     order: 10;
   }
 
-
+  
 
   .board-game {
     flex-direction: row;
@@ -249,6 +260,7 @@ button{
     gap: 0.5rem;
     justify-content: center;
     align-items: stretch;
+    order: 2;
   }
 
   .board-row {
@@ -288,6 +300,10 @@ button{
 
 .close-wrapper button{
   font-size: 1.5rem;
+}
+
+#restart-game{
+  order: 0;
 }
 
   
