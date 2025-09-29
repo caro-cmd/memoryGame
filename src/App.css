@@ -2,7 +2,7 @@
 
 #heart-btn{
   position: fixed;
-  top: 90vh;
+  bottom: 1vh;
   left: 2vw;
   padding: 1%;
   border-radius: 100%;
@@ -189,6 +189,9 @@ button{
 
 .new-game-container h2{
   font-size: 2.8rem;
+  margin: 0;
+  text-align: center;
+  align-items: center;
 }
 
 .close-wrapper{
@@ -212,21 +215,59 @@ button{
   
 }
 
+#start-new-game-btn{
+  margin-top: 8px;
+}
+
 /* Tablet */
 @media (max-width: 1024px) {
   
 }
 
 /* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 760px) {
   .header {
     flex-direction: column;
     gap: 10px;
+    height: fit-content;
   }
 
   #change-category-btn{
     order: 10;
   }
+
+  .board-game{
+    flex-direction: row;
+  }
+
+  .board-row{
+    flex-direction: column;
+    width: 45%;
+    max-height: 90%;
+  }
+
+  .memory-card {
+    flex: 1 1 30%; 
+  }
+
+  .new-game-container{
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: fit-content;
+
+  gap: 1rem;
+
+  background: gray;
+}
+
+.new-game-container h2{
+  font-size: 2rem;
+}
+
+.close-wrapper button{
+  font-size: 1.5rem;
+}
 
   
 }
