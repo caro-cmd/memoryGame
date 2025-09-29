@@ -182,7 +182,7 @@ function MemoryCard( {value, isFlipped, onCardClick}){
           
         </div>
         <div className="memory-card-back">
-          <img src={`src/assets/${value}.png`} alt="" /></div>
+          <img src={`../assets/${value}.png`} alt={value} /></div>
       </div>
     </div>
   );
