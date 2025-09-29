@@ -240,7 +240,9 @@ button{
     order: 10;
   }
 
-    .board-game {
+
+
+  .board-game {
     flex-direction: row;
     height: 90%;
     width: 100%;
