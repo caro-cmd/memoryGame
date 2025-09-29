@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import {useEffect, useState} from 'react'
 import Confetti from 'react-confetti'
 import { useWindowSize } from "react-use";
 import './App.css'
@@ -6,6 +6,8 @@ import './App.css'
 
 function App() {
   const [showPopUp, setShowPopUp] = useState(false);
+  const [millisecond, setMillisecond] = useState(0);
+  const [isTimeActive, setIsTimeActive] = useState(true);
 
   function handleShowPopUp(){
     setShowPopUp(true);
@@ -18,10 +20,30 @@ function App() {
   return (
     <>
       
-      <h1>Memory Game</h1>
-      <div className="card">
-        <BoardGame />
+      <div className="header">
+        <button id='change-category-btn'>
+          <i className="fa-solid fa-list"></i>
+          Kategorie ändern
+        </button>
+
+        <h1>Memory</h1>
+
+         <StopWatch 
+          millisecond={millisecond}
+          setMillisecond={setMillisecond}
+          isTimeActive={isTimeActive}
+          setIsTimeActive={setIsTimeActive}
+         />
+
       </div>
+  
+      
+      <BoardGame 
+        millisecond={millisecond}
+        setMillisecond={setMillisecond}
+        isTimeActive={isTimeActive}
+        setIsTimeActive={setIsTimeActive}
+      />
 
       <button id='heart-btn' onMouseEnter={handleShowPopUp} onMouseLeave={handleHidePopup}>
         <i className="fa-solid fa-heart"></i>
@@ -42,11 +64,60 @@ function App() {
   
 }
 
+function StopWatch({millisecond, setMillisecond, isTimeActive, setIsTimeActive}){
+
+  // increment time 
+  useEffect(() =>{
+    let interval = null;
+
+    if(isTimeActive){
+      interval = setInterval(() => {
+        setMillisecond((prev) => prev+1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isTimeActive])
+
+  
+
+  // console.log(millisecond)
+
+  // if 1000 ms => 1s, 60s => 1min, 60 min => 1h, 
+  
+  function convertTime(seconds){
+
+    const hours = Math.floor(seconds / 3600); // 1h => 3600 s, 
+
+    const minutes = Math.floor((seconds / 60) % 60); // how many minutes (seconds/60) => remainder bc of hours
+
+    const secs = Math.floor(seconds % 60); // remainder of 1 minute
+
+    
+    return { hours: String(hours).padStart(2, "0"), 
+             minutes: String(minutes).padStart(2, "0"), 
+             seconds: String(secs).padStart(2, "0") };
+  }
+  
+  const{hours, minutes, seconds} = convertTime(millisecond);
+  
+  return(
+    
+    <div className="stop-watch-container">
+      <div className="time">{hours}</div>
+      <div className="time">{minutes}</div>
+      <div className="time">{seconds}</div>
+    </div>
+  
+    )
+
+
+}
+
 let cards_text = ["Cat", "Dog" , "Cat", "Dog", "Tree", "Tree"]
 let cards = ["5", "5", "4", "4", "3", "3"]
 cards = cards.sort(() => Math.random() - 0.5);
 
-function BoardGame(){
+function BoardGame({millisecond, setMillisecond, isTimeActive, setIsTimeActive}){
   const possibleMatches = new Set(cards).size;
 
   const [flippedCards, setFlippedCards] = useState([]);
@@ -89,6 +160,7 @@ function BoardGame(){
           // if flipped cards equals number of cards => win!
           if(newFlipped.length === cards.length){
             setHasWon(true);
+            setIsTimeActive(false);
           }
 
           setIsBusy(false);
@@ -114,6 +186,8 @@ function BoardGame(){
     setHasWon(false);
     setIsBusy(false);
     cards = cards.sort(() => Math.random() - 0.5);
+
+    setMillisecond(0)
   }
 
   function closeWinningOverlay(){
@@ -137,7 +211,10 @@ function BoardGame(){
           </div>
         
         </div>
-        <button id='restart-game' onClick={resetGame}>Restart Game</button>
+        <button id='restart-game' onClick={resetGame}>
+          <i className="fa-solid fa-arrow-rotate-left"></i>
+          Neu beginnen
+        </button>
       </div>
       {/* show Confetti if all matches found (hasWon = true) */}
       {hasWon  && ( 
@@ -150,9 +227,12 @@ function BoardGame(){
                 </button>
               </div>
           
-              <h3>Du hast gewonnen!</h3>
+              <h2>Du hast gewonnen!</h2>
 
-              <button id="start-new-game" onClick={resetGame}>Start new game</button>
+              <button id="start-new-game" onClick={resetGame}>
+                <i className="fa-solid fa-arrow-rotate-left"></i>
+                Weitere Runde
+              </button>
 
             </div>
 
@@ -182,7 +262,7 @@ function MemoryCard( {value, isFlipped, onCardClick}){
           
         </div>
         <div className="memory-card-back">
-          <img src={`/assets/${value}.png`} alt={value} /></div>
+          <img src={`/assets/dinosaurier/${value}.png`} alt={value} /></div>
       </div>
     </div>
   );
