@@ -1,3 +1,7 @@
+# Memory Game
+
+A simple Memory Game developed for my nephews O & E. 
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
