@@ -46,6 +46,7 @@
   align-items: center;
   
   box-sizing: border-box;
+  gap: 1rem;
 }
 
 .board-game {
@@ -61,13 +62,16 @@
 .board-row{
   display: flex;
   flex-direction: row;
-  max-height: 45%;
+  flex: 1 1 0;     
   gap: 1rem;
   box-sizing: border-box;
+  height: 0;   
 }
 
 .memory-card {
-  flex: 1 1 27%; 
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
   aspect-ratio: 1/1;
   cursor: pointer;
 }
@@ -236,18 +240,33 @@ button{
     order: 10;
   }
 
-  .board-game{
+    .board-game {
     flex-direction: row;
+    height: 90%;
+    width: 100%;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: stretch;
   }
 
-  .board-row{
+  .board-row {
     flex-direction: column;
-    width: 45%;
-    max-height: 90%;
+    flex: 1 1 0;
+    gap: 0.5rem;
+    height: 100%;
+    width: auto;
+    justify-content: center;
+    align-items: stretch;
   }
 
   .memory-card {
-    flex: 1 1 30%; 
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 0;
+    aspect-ratio: 1/1;
+    /* Optional: Begrenzung für sehr kleine Screens */
+    max-width: 90vw;
+    max-height: 90vw;
   }
 
   .new-game-container{
